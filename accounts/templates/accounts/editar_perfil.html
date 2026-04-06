@@ -1,0 +1,12 @@
+{% extends "blog/padre.html" %}
+
+{% block contenido_que_cambia %}
+    <h1>Editar mi Perfil</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Guardar Cambios</button>
+    </form>
+    <br>
+    <a href="{% url 'inicio' %}">Cancelar</a>
+{% endblock %}

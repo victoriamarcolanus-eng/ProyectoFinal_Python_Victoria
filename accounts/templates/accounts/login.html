@@ -1,0 +1,11 @@
+{% extends "blog/padre.html" %}
+
+{% block contenido_que_cambia %}
+    <h1>Iniciar Sesión</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Entrar</button>
+    </form>
+    <p>¿No tenés cuenta? <a href="{% url 'register' %}">Registrate acá</a></p>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "blog/padre.html" %}
+{% block contenido_que_cambia %}
+    <form method="post">{% csrf_token %}
+        <p>¿Estás segura de que querés borrar "{{ object.titulo }}"?</p>
+        <button type="submit">Sí, borrar</button>
+        <a href="{% url 'pages' %}">Cancelar</a>
+    </form>
+{% endblock %}

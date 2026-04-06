@@ -1,0 +1,11 @@
+{% extends "blog/padre.html" %}
+
+{% block contenido_que_cambia %}
+    <h1>Crear una cuenta nueva</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrarme</button>
+    </form>
+    <p>¿Ya tenés cuenta? <a href="{% url 'login' %}">Iniciá sesión acá</a></p>
+{% endblock %}

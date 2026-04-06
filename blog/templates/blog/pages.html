@@ -1,0 +1,44 @@
+{% extends "blog/padre.html" %}
+
+{% block contenido_que_cambia %}
+    <h1>Listado de Publicaciones</h1>
+    <hr>
+
+    <form action="" method="GET" style="margin-bottom: 20px;">
+        <input type="text" name="buscar" placeholder="Buscar por título..." style="padding: 5px; width: 250px;">
+        <button type="submit" style="padding: 5px 15px;">Buscar</button>
+        <a href="{% url 'pages' %}" style="margin-left: 10px; font-size: 0.8em;">Limpiar búsqueda</a>
+    </form>
+
+    {% if user.is_authenticated %}
+        <div style="margin-bottom: 20px;">
+            <a href="{% url 'post_create' %}" style="background: #28a745; color: white; padding: 10px; text-decoration: none; border-radius: 5px;">+ Crear Nueva Publicación</a>
+        </div>
+    {% endif %}
+
+    {% if posts %}
+        {% for post in posts %}
+            <div style="display: flex; gap: 20px; border-bottom: 1px solid #ddd; padding: 20px 0; align-items: start;">
+                {% if post.imagen %}
+                    <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" style="width: 200px; border-radius: 8px;">
+                {% endif %}
+
+                <div>
+                    <h2 style="margin-top: 0;">{{ post.titulo }}</h2>
+                    <h4 style="color: #666;">{{ post.subtitulo }}</h4>
+                    <p style="font-size: 0.9em; color: #888;">Por {{ post.autor }} el {{ post.fecha|date:"d/m/Y" }}</p>
+                    
+                    <a href="{% url 'post_detail' post.pk %}" style="background: #333; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px;">Leer más</a>
+                    
+                    {% if user.is_authenticated %}
+                        | <a href="{% url 'post_delete' post.pk %}" style="color: #d9534f; font-size: 0.9em;">Eliminar</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div style="padding: 20px; background: #f8d7da; color: #721c24; border-radius: 5px; border: 1px solid #f5c6cb;">
+            No hay páginas aún o no se encontraron resultados.
+        </div>
+    {% endif %}
+{% endblock %}
